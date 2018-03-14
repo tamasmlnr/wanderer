@@ -126,7 +126,6 @@ public class PositionedImage {
 }
 ```
 
-
 ### 3. Create a GitHub project under your repository for your work and add the [project stories](https://github.com/greenfox-academy/teaching-materials/blob/master/project/wanderer/stories.md).
 
 ### 4. Form groups and plan your application together.

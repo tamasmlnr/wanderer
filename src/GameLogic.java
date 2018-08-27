@@ -1,31 +1,55 @@
+import javax.swing.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Creatures {
-  public HashMap<Creature, int[]> characters = new HashMap<Creature, int[]>();
+public class GameLogic {
+  public ArrayList<Creature> characters;
+  Hero hero;
+  public boolean passable;
 
-  public Creatures() {
+  public static int[][] mapArray = new int[][]{
+      {1, 1, 1, 0, 1, 0, 1, 1, 1, 1},
+      {1, 1, 1, 0, 1, 0, 1, 0, 0, 1},
+      {1, 0, 0, 0, 1, 0, 1, 0, 0, 1},
+      {1, 1, 1, 1, 1, 0, 1, 1, 1, 1},
+      {0, 0, 0, 0, 1, 0, 0, 0, 0, 1},
+      {1, 0, 1, 0, 1, 1, 1, 1, 0, 1},
+      {1, 0, 1, 0, 1, 0, 0, 1, 0, 1},
+      {1, 1, 1, 1, 1, 0, 0, 1, 0, 1},
+      {1, 0, 0, 0, 1, 1, 1, 1, 0, 1},
+      {1, 1, 1, 0, 1, 0, 0, 1, 1, 1},
+  };
+
+  public GameLogic() throws IOException {
+    ArrayList<Creature> characters = new ArrayList<>();
+    hero = new Hero();
+  }
+
+  public static boolean isPassable(int[] tile) {
+    int x=tile[0]/72;
+    int y=tile[1]/72;
+
+    if (mapArray[y][x]==0)
+    return false;
+    return true;
   }
 
   public void addCreature(Creature creature, int x, int y) {
-    int[] location = new int[]{x, y};
-    characters.put(creature, location);
+    characters.add(creature);
+  }
+
+  public Hero getHero() {
+    return hero;
   }
 
   public int getX(Creature creature) {
-    int[] temp=characters.get(creature);
-    return temp[0];
+    return creature.getX();
   }
-
 
   public int getY(Creature creature) {
-    int[] temp=characters.get(creature);
-    return temp[1];
+    return creature.getY();
   }
-//
-//  public void drawAllCreatures() {
-//    for (Creature crea : characters.keySet())
-//    Map.drawCreatre(crea, crea.getX, y);
-//  }
-
 }
+
+

@@ -1,26 +1,26 @@
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
 public class Hero extends Creature {
-  public static int x = 0;
-  public static int y = 0;
+  public BufferedImage heroImgDown = ImageIO.read(new File("img/hero-down.png"));
+  public BufferedImage heroImgUp = ImageIO.read(new File("img/hero-up.png"));
+  public BufferedImage heroImgLeft = ImageIO.read(new File("img/hero-left.png"));
+  public BufferedImage heroImgRight = ImageIO.read(new File("img/hero-right.png"));
 
-  public Hero() {
+
+  public Hero() throws IOException {
     super(0, 0);
-    x = 0;
-    y = 0;
   }
 
-  public void drawHero() {
-    Map.drawCreatre(x, y, this);
+  public BufferedImage currentImage() {
+    if (lastMovement == "left") return heroImgLeft;
+    if (lastMovement == "right") return heroImgRight;
+    if (lastMovement == "up") return heroImgUp;
+    return heroImgDown;
   }
 
-  public int getX() {
-    return x;
-  }
 
-  public int getY() {
-    return y;
-  }
-
-  public void move() {
-
-  }
 }

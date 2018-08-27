@@ -1,8 +1,6 @@
-import javax.imageio.ImageIO;
+package GamePackage;
+
 import javax.swing.*;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 public class Main {

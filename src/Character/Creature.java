@@ -1,3 +1,12 @@
+package Character;
+
+import GamePackage.GameLogic;
+
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
 public class Creature {
   public int x;
   public int y;
@@ -20,6 +29,10 @@ public class Creature {
     return pos;
   }
 
+  public BufferedImage currentImage() throws IOException {
+    BufferedImage def= ImageIO.read(new File("img/hero-right.png"));
+    return def;
+  }
 
   public int getX() {
     return this.x;
@@ -27,32 +40,30 @@ public class Creature {
 
   public void moveRight() {
     this.lastMovement = "right";
-    int[] targetPos=currentPos();
-    targetPos[0]+=72;
-    if ((x < 648)&&GameLogic.isPassable(targetPos))
-      x += 72;
+    int[] targetPos = currentPos();
+    targetPos[0] += 72;
+    if ((x < 648) && GameLogic.isPassable(targetPos)) x += 72;
   }
 
   public void moveLeft() {
     this.lastMovement = "left";
-    int[] targetPos=currentPos();
-    targetPos[0]-=72;
-    if ((x > 0)&&GameLogic.isPassable(targetPos))  x -= 72;
+    int[] targetPos = currentPos();
+    targetPos[0] -= 72;
+    if ((x > 0) && GameLogic.isPassable(targetPos)) x -= 72;
   }
 
   public void moveDown() {
     this.lastMovement = "down";
-    int[] targetPos=currentPos();
-    targetPos[1]+=72;
-    if ((y < 648)&&GameLogic.isPassable(targetPos)) y += 72;
+    int[] targetPos = currentPos();
+    targetPos[1] += 72;
+    if ((y < 648) && GameLogic.isPassable(targetPos)) y += 72;
   }
 
   public void moveUp() {
     this.lastMovement = "up";
-    int[] targetPos=currentPos();
-    targetPos[1]-=72;
-    if ((y > 0)&&GameLogic.isPassable(targetPos))
-      y -= 72;
+    int[] targetPos = currentPos();
+    targetPos[1] -= 72;
+    if ((y > 0) && GameLogic.isPassable(targetPos)) y -= 72;
   }
 
   public int getY() {

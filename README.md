@@ -15,7 +15,7 @@ the monsters holding the keys to the next level.
 
 #### How to launch the program
 
-- Launching the game is running the `Main` class' `main()` method.
+- Launching the game is running the `GamePackage.Main` class' `main()` method.
 - When reading through the specification and the stories again keep this in mind.
 - Here's an example, it contains
   - a big drawable canvas with one image painted on it
@@ -29,12 +29,12 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class Board extends JComponent implements KeyListener {
+public class GamePackage.Board extends JComponent implements KeyListener {
 
   int testBoxX;
   int testBoxY;
 
-  public Board() {
+  public GamePackage.Board() {
     testBoxX = 300;
     testBoxY = 300;
 
@@ -56,7 +56,7 @@ public class Board extends JComponent implements KeyListener {
   public static void main(String[] args) {
     // Here is how you set up a new window and adding our board to it
     JFrame frame = new JFrame("RPG Game");
-    Board board = new Board();
+    GamePackage.Board board = new GamePackage.Board();
     frame.add(board);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.setVisible(true);
@@ -66,7 +66,7 @@ public class Board extends JComponent implements KeyListener {
     // with the system calling one of the below 3 methods
     frame.addKeyListener(board);
     // Notice (at the top) that we can only do this
-    // because this Board class (the type of the board object) is also a KeyListener
+    // because this GamePackage.Board class (the type of the board object) is also a KeyListener
   }
 
   // To be a KeyListener the class needs to have these 3 methods in it
@@ -102,12 +102,12 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class PositionedImage {
+public class GamePackage.PositionedImage {
 
   BufferedImage image;
   int posX, posY;
 
-  public PositionedImage(String filename, int posX, int posY) {
+  public GamePackage.PositionedImage(String filename, int posX, int posY) {
     this.posX = posX;
     this.posY = posY;
     try {
@@ -142,10 +142,10 @@ Plan your architecture. In your architecture you should consider the following c
         - Tile
             - EmptyTile
             - NotEmptyTile
-- GameLogic
+- GamePackage.GameLogic
     - current hero
     - current area
-- Main
+- GamePackage.Main
     - handling events
     - current game
 

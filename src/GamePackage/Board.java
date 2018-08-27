@@ -1,10 +1,15 @@
+package GamePackage;
+
 import Tile.*;
+import Character.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 public class Board extends JComponent implements KeyListener {
   public static final int WIDTH = 720;
@@ -13,6 +18,9 @@ public class Board extends JComponent implements KeyListener {
 
   public Board() throws IOException {
     gameLogic = new GameLogic();
+    gameLogic.addHero();
+    gameLogic.addSkeletons();
+    gameLogic.addBoss();
     setPreferredSize(new Dimension(720, 720));
     setVisible(true);
   }
@@ -41,12 +49,21 @@ public class Board extends JComponent implements KeyListener {
         }
       }
     }
-    drawCharacters(g);
+    try {
+      drawCharacters(g);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
   //
-  public void drawCharacters(Graphics g) {
-    g.drawImage(gameLogic.getHero().currentImage(), gameLogic.getHero().getX(), gameLogic.getHero().getY(), this);
+  public void drawCharacters(Graphics g) throws IOException {
+//    g.drawImage(gameLogic.getHero().currentImage(), gameLogic.getHero().getX(), gameLogic.getHero().getY(), this);
+    ArrayList<Creature> creaList = gameLogic.getCreatures();
+    for (Creature creature : creaList) {
+      g.drawImage(creature.currentImage(), creature.getX(), creature.getY(), this);
+    }
+
   }
 
 

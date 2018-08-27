@@ -72,7 +72,7 @@ public class Board extends JComponent implements KeyListener {
 
   //
   public void drawCharacters(Graphics g) throws IOException {
-//    g.drawImage(gameLogic.getHero().currentImage(), gameLogic.getHero().getX(), gameLogic.getHero().getY(), this);
+    g.drawImage(gameLogic.getHero().currentImage(), gameLogic.getHero().getX(), gameLogic.getHero().getY(), this);
     ArrayList<Creature> creaList = gameLogic.getCreatures();
     for (Creature creature : creaList) {
       g.drawImage(creature.currentImage(), creature.getX(), creature.getY(), this);
@@ -99,6 +99,7 @@ public class Board extends JComponent implements KeyListener {
     } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
       gameLogic.getHero().moveRight();
     }
+    gameLogic.randomMoveCreatures();
     repaint();
   }
 }

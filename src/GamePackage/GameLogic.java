@@ -30,15 +30,14 @@ public class GameLogic {
 
   public static int d6() {
     Random rn = new Random();
-    return rn.nextInt(5)+1;
+    return rn.nextInt(5) + 1;
   }
 
   public void addHero() throws IOException {
     hero = new Hero();
-    creatures.add(hero);
   }
 
-  public int[] generateRandomPosition() {
+  public int[] generateRandomSpawn() {
     Random rn = new Random();
     int[] co = new int[2];
     while (true) {
@@ -48,7 +47,7 @@ public class GameLogic {
       co[1] = y * 72;
       if (GameLogic.isPassable(co)) {
         return co;
-      } else generateRandomPosition();
+      } else generateRandomSpawn();
     }
   }
 
@@ -56,13 +55,13 @@ public class GameLogic {
   public void addSkeletons(int level) throws IOException {
     int[] skelPos;
     for (int i = 0; i < 3; i++) {
-      skelPos = generateRandomPosition();
+      skelPos = generateRandomSpawn();
       creatures.add(new Skeleton(skelPos[0], skelPos[1], level));
     }
   }
 
   public void addBoss(int level) throws IOException {
-    int[] bossPos = generateRandomPosition();
+    int[] bossPos = generateRandomSpawn();
     creatures.add(new Boss(bossPos[0], bossPos[1], level));
   }
 
@@ -77,6 +76,18 @@ public class GameLogic {
     if (mapArray[y][x] == 0) return false;
     return true;
   }
+
+  public void randomMoveCreatures() {
+//    int[] pos;
+    for (Creature creature : creatures) {
+//      while (true) {
+        creature.randomMove();
+//        pos = creature.currentPos();
+//        if (isPassable(pos)) break;
+//        else creature.randomMove();
+      }
+    }
+//  }
 
   public void addCreature(Creature creature, int x, int y) {
     creatures.add(creature);

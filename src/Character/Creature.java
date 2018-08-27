@@ -6,6 +6,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Random;
 
 public class Creature {
   public int x;
@@ -43,7 +44,6 @@ public class Creature {
     return level;
   }
 
-
   public int[] currentPos() {
     int[] pos = new int[2];
     pos[0] = x;
@@ -58,6 +58,9 @@ public class Creature {
 
   public int getX() {
     return this.x;
+  }
+  public int getY() {
+    return this.y;
   }
 
   public void moveRight() {
@@ -88,8 +91,23 @@ public class Creature {
     if ((y > 0) && GameLogic.isPassable(targetPos)) y -= 72;
   }
 
-  public int getY() {
-    return this.y;
+  public void randomMove() {
+    Random rn = new Random();
+    int x = rn.nextInt(3);
+    switch (x) {
+      case 0:  moveUp();
+        break;
+      case 1:  moveDown();
+        break;
+      case 2:  moveRight();
+        break;
+      case 3:  moveLeft();
+        break;
+  }
+  }
+
+  public void Strike(Character enemy){
+    
   }
 
 }

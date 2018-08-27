@@ -15,5 +15,4 @@ public class Boss extends Creature {
   public BufferedImage currentImage() {
     return bossImg;
   }
-
 }

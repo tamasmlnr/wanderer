@@ -8,7 +8,6 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Board extends JComponent implements KeyListener {
@@ -21,13 +20,28 @@ public class Board extends JComponent implements KeyListener {
     gameLogic.addHero();
     gameLogic.addSkeletons();
     gameLogic.addBoss();
-    setPreferredSize(new Dimension(720, 720));
+    setPreferredSize(new Dimension(720, 750));
     setVisible(true);
+  }
+
+  public void drawStats(Graphics g) {
+    g.setColor(Color.black);
+    g.fillRect(0, 720, 720, 100);
+    g.setColor(Color.white);
+    Font myFont = new Font("Garamond", 0, 17);
+    g.setFont(myFont);
+    g.drawString("Level: " + gameLogic.getHero().getLevel()
+            + "     Health: " + gameLogic.getHero().getCurrentHealth()
+            + "/" + gameLogic.getHero().getMaxHealth()
+            + "     Defend point: " + gameLogic.getHero().getDefense()
+            + "     Strike point: " + gameLogic.getHero().getDefense()
+        , +20, 738);
   }
 
   @Override
   public void paint(Graphics g) {
     super.paint(g);
+
     for (int x = 0; x < 10; x++) {
       for (int y = 0; y < 10; y++) {
 
@@ -54,6 +68,7 @@ public class Board extends JComponent implements KeyListener {
     } catch (IOException e) {
       e.printStackTrace();
     }
+    drawStats(g);
   }
 
   //

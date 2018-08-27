@@ -11,7 +11,18 @@ public class GameLogic {
   Hero hero;
   public boolean passable;
 
-  public static int[][] mapArray = new int[][]{{1, 1, 1, 0, 1, 0, 1, 1, 1, 1}, {1, 1, 1, 0, 1, 0, 1, 0, 0, 1}, {1, 0, 0, 0, 1, 0, 1, 0, 0, 1}, {1, 1, 1, 1, 1, 0, 1, 1, 1, 1}, {0, 0, 0, 0, 1, 0, 0, 0, 0, 1}, {1, 0, 1, 0, 1, 1, 1, 1, 0, 1}, {1, 0, 1, 0, 1, 0, 0, 1, 0, 1}, {1, 1, 1, 1, 1, 0, 0, 1, 0, 1}, {1, 0, 0, 0, 1, 1, 1, 1, 0, 1}, {1, 1, 1, 0, 1, 0, 0, 1, 1, 1},};
+  public static int[][] mapArray = new int[][]
+      {{1, 1, 1, 0, 1, 0, 1, 1, 1, 1},
+          {1, 1, 1, 0, 1, 0, 1, 0, 0, 1},
+          {1, 0, 0, 0, 1, 0, 1, 0, 0, 1},
+          {1, 1, 1, 1, 1, 0, 1, 1, 1, 1},
+          {0, 0, 0, 0, 1, 0, 0, 0, 0, 1},
+          {1, 0, 1, 0, 1, 1, 1, 1, 0, 1},
+          {1, 0, 1, 0, 1, 0, 0, 1, 0, 1},
+          {1, 1, 1, 1, 1, 0, 0, 1, 0, 1},
+          {1, 0, 0, 0, 1, 1, 1, 1, 0, 1},
+          {1, 1, 1, 0, 1, 0, 0, 1, 1, 1},};
+
 
   public GameLogic() {
     creatures = new ArrayList<>();
@@ -47,8 +58,8 @@ public class GameLogic {
 
   public void addBoss() throws IOException {
     int[] bossPos = generateRandomPosition();
-      creatures.add(new Boss(bossPos[0], bossPos[1]));
-    }
+    creatures.add(new Boss(bossPos[0], bossPos[1]));
+  }
 
   public ArrayList<Creature> getCreatures() {
     return creatures;

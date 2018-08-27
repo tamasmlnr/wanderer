@@ -10,17 +10,41 @@ import java.io.IOException;
 public class Creature {
   public int x;
   public int y;
-  // private int hp;
-// private int dmg;
   public String lastMovement;
+  private int level = 1;
+  public int maxHealth;
+  public int currentHealth;
+  public int defense;
+  public int strike;
+
+  public int getDefense() {
+    return defense;
+  }
+
+  public int getStrike() {
+    return strike;
+  }
+
+
 
   public Creature(int x, int y) {
     this.x = x;
     this.y = y;
     this.lastMovement = "down";
-//   this.hp=0;
-//   this.dmg=0;
   }
+
+  public int getMaxHealth() {
+    return maxHealth;
+  }
+
+  public int getCurrentHealth() {
+    return currentHealth;
+  }
+
+  public int getLevel() {
+    return level;
+  }
+
 
   public int[] currentPos() {
     int[] pos = new int[2];
@@ -30,7 +54,7 @@ public class Creature {
   }
 
   public BufferedImage currentImage() throws IOException {
-    BufferedImage def= ImageIO.read(new File("img/hero-right.png"));
+    BufferedImage def = ImageIO.read(new File("img/hero-right.png"));
     return def;
   }
 

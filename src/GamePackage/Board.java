@@ -18,8 +18,8 @@ public class Board extends JComponent implements KeyListener {
   public Board() throws IOException {
     gameLogic = new GameLogic();
     gameLogic.addHero();
-    gameLogic.addSkeletons();
-    gameLogic.addBoss();
+    gameLogic.addSkeletons(1);
+    gameLogic.addBoss(1);
     setPreferredSize(new Dimension(720, 750));
     setVisible(true);
   }
@@ -33,8 +33,8 @@ public class Board extends JComponent implements KeyListener {
     g.drawString("Level: " + gameLogic.getHero().getLevel()
             + "     Health: " + gameLogic.getHero().getCurrentHealth()
             + "/" + gameLogic.getHero().getMaxHealth()
-            + "     Defend point: " + gameLogic.getHero().getDefense()
-            + "     Strike point: " + gameLogic.getHero().getDefense()
+            + "     Defend point: " + gameLogic.getHero().getDp()
+            + "     Strike point: " + gameLogic.getHero().getDp()
         , +20, 738);
   }
 
@@ -81,7 +81,6 @@ public class Board extends JComponent implements KeyListener {
 
   }
 
-
   @Override
   public void keyTyped(KeyEvent e) {
   }
@@ -103,6 +102,4 @@ public class Board extends JComponent implements KeyListener {
     }
     repaint();
   }
-
-
 }

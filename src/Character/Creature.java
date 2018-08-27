@@ -11,18 +11,18 @@ public class Creature {
   public int x;
   public int y;
   public String lastMovement;
-  private int level = 1;
-  public int maxHealth;
-  public int currentHealth;
-  public int defense;
-  public int strike;
+  public int level=0;
+  public int maxHealth=0;
+  public int currentHealth=0;
+  public double dp=0;
+  public int sp=0;
 
-  public int getDefense() {
-    return defense;
+  public double getDp() {
+    return dp;
   }
 
-  public int getStrike() {
-    return strike;
+  public int getSp() {
+    return sp;
   }
 
 

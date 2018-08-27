@@ -28,6 +28,11 @@ public class GameLogic {
     creatures = new ArrayList<>();
   }
 
+  public static int d6() {
+    Random rn = new Random();
+    return rn.nextInt(5)+1;
+  }
+
   public void addHero() throws IOException {
     hero = new Hero();
     creatures.add(hero);
@@ -48,17 +53,17 @@ public class GameLogic {
   }
 
 
-  public void addSkeletons() throws IOException {
+  public void addSkeletons(int level) throws IOException {
     int[] skelPos;
     for (int i = 0; i < 3; i++) {
       skelPos = generateRandomPosition();
-      creatures.add(new Skeleton(skelPos[0], skelPos[1]));
+      creatures.add(new Skeleton(skelPos[0], skelPos[1], level));
     }
   }
 
-  public void addBoss() throws IOException {
+  public void addBoss(int level) throws IOException {
     int[] bossPos = generateRandomPosition();
-    creatures.add(new Boss(bossPos[0], bossPos[1]));
+    creatures.add(new Boss(bossPos[0], bossPos[1], level));
   }
 
   public ArrayList<Creature> getCreatures() {

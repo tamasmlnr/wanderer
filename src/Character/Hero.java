@@ -1,5 +1,7 @@
 package Character;
 
+import GamePackage.GameLogic;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -14,6 +16,14 @@ public class Hero extends Creature {
 
   public Hero() throws IOException {
     super(0, 0);
+    super.level=1;
+    super.maxHealth=20+3* GameLogic.d6();
+    super.dp=2* GameLogic.d6();
+    super.dp=5+ GameLogic.d6();
+  }
+
+  public int getLevel() {
+    return this.level;
   }
 
   public BufferedImage currentImage() {
@@ -22,6 +32,4 @@ public class Hero extends Creature {
     if (lastMovement == "up") return heroImgUp;
     return heroImgDown;
   }
-
-
 }

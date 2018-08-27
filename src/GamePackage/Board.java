@@ -76,6 +76,10 @@ public class Board extends JComponent implements KeyListener {
     ArrayList<Creature> creaList = gameLogic.getCreatures();
     for (Creature creature : creaList) {
       g.drawImage(creature.currentImage(), creature.getX(), creature.getY(), this);
+      Font myFont = new Font("Garamond", 0, 17);
+      g.setFont(myFont);
+      g.setColor(Color.white);
+      g.drawString(creature.currentHealth+"",creature.getX()+32, creature.getY());
     }
 
   }
@@ -92,14 +96,21 @@ public class Board extends JComponent implements KeyListener {
   public void keyReleased(KeyEvent e) {
     if (e.getKeyCode() == KeyEvent.VK_UP) {
       gameLogic.getHero().moveUp();
+      gameLogic.randomMoveCreatures();
     } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
       gameLogic.getHero().moveDown();
+      gameLogic.randomMoveCreatures();
     } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
       gameLogic.getHero().moveLeft();
+      gameLogic.randomMoveCreatures();
     } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
       gameLogic.getHero().moveRight();
     }
-    gameLogic.randomMoveCreatures();
+     if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+      if(gameLogic.getEnemyOnTile()!=null)
+      gameLogic.getHero().Strike(gameLogic.getEnemyOnTile());
+    }
+
     repaint();
   }
 }

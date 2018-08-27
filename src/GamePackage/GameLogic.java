@@ -78,16 +78,11 @@ public class GameLogic {
   }
 
   public void randomMoveCreatures() {
-//    int[] pos;
     for (Creature creature : creatures) {
-//      while (true) {
-        creature.randomMove();
-//        pos = creature.currentPos();
-//        if (isPassable(pos)) break;
-//        else creature.randomMove();
-      }
+      creature.randomMove();
     }
-//  }
+  }
+
 
   public void addCreature(Creature creature, int x, int y) {
     creatures.add(creature);
@@ -103,6 +98,19 @@ public class GameLogic {
 
   public int getY(Creature creature) {
     return creature.getY();
+  }
+
+  public Creature getEnemyOnTile() {
+    for (Creature crea : creatures) {
+      System.out.print("enemy:"+crea.currentPos()[0]/72);
+      System.out.println(crea.currentPos()[1]/72);
+      System.out.print("hero:"+getHero().currentPos()[0]/72);
+      System.out.println(getHero().currentPos()[1]/72);
+      if (crea.currentPos() == getHero().currentPos()) {
+        return crea;
+      }
+    }
+    return null;
   }
 }
 

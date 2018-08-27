@@ -106,8 +106,11 @@ public class Creature {
   }
   }
 
-  public void Strike(Character enemy){
-    
+  public void Strike(Creature enemy){
+    //
+    if(this.currentPos()==enemy.currentPos()&&(2*GameLogic.d6()>enemy.dp)){
+    enemy.currentHealth-=sp-enemy.dp;
+    }
   }
 
 }

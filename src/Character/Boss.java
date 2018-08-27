@@ -15,7 +15,7 @@ public class Boss extends Creature {
     super.level=level;
     super.maxHealth=2*level* GameLogic.d6()+GameLogic.d6();
     super.dp=(double)(level / 2 )* GameLogic.d6()+GameLogic.d6()/2;
-    super.dp=level*GameLogic.d6();
+    super.sp=level*GameLogic.d6()+level;
   }
 
   public BufferedImage currentImage() {

@@ -16,10 +16,10 @@ public class Hero extends Creature {
 
   public Hero() throws IOException {
     super(0, 0);
-    super.level=1;
-    super.maxHealth=20+3* GameLogic.d6();
-    super.dp=2* GameLogic.d6();
-    super.dp=5+ GameLogic.d6();
+    level=1;
+    maxHealth=20+3* GameLogic.d6();
+    dp=2* GameLogic.d6();
+    sp=5+ GameLogic.d6();
   }
 
   public int getLevel() {

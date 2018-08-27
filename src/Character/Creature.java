@@ -25,8 +25,6 @@ public class Creature {
     return sp;
   }
 
-
-
   public Creature(int x, int y) {
     this.x = x;
     this.y = y;

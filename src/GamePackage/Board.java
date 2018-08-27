@@ -34,7 +34,7 @@ public class Board extends JComponent implements KeyListener {
             + "     Health: " + gameLogic.getHero().getCurrentHealth()
             + "/" + gameLogic.getHero().getMaxHealth()
             + "     Defend point: " + gameLogic.getHero().getDp()
-            + "     Strike point: " + gameLogic.getHero().getDp()
+            + "     Strike point: " + gameLogic.getHero().getSp()
         , +20, 738);
   }
 
@@ -48,7 +48,6 @@ public class Board extends JComponent implements KeyListener {
         int mod_x = WIDTH / 10 * x;
         int mod_y = HEIGHT / 10 * y;
         if (GameLogic.mapArray[y][x] == 0) {
-
           try {
             g.drawImage(new EmptyTile().getImage(), mod_x, mod_y, this);
           } catch (IOException e) {

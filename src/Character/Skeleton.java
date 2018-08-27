@@ -15,7 +15,7 @@ public class Skeleton extends Creature {
     super.level=level;
     super.maxHealth=2*level*GameLogic.d6();
     super.dp=(double)(level / 2 )* GameLogic.d6();
-    super.dp=level*GameLogic.d6();
+    super.sp=level*GameLogic.d6();
   }
 
   public BufferedImage currentImage() {

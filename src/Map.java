@@ -33,6 +33,14 @@ public class Map extends JPanel {
     wallTile = wallImage;
   }
 
+  protected void drawCharacters(Graphics g) {
+        g.drawImage(hero, Hero.y, Hero.x, this);
+      }
+
+
+  public static void drawCreatre(int x,int y, Creature creature) {
+
+  }
 
   protected void paintComponent(Graphics g) {
     for (int x = 0; x < 10; x++) {
@@ -44,10 +52,12 @@ public class Map extends JPanel {
         switch (mapArray[y][x]) {
           case 0:
             g.drawImage(wallTile, mod_x, mod_y, this);
+            drawCharacters(g);
             break;
           case 1:
             System.out.println("1"+mapArray[x][y]);
             g.drawImage(floorTile, mod_x, mod_y, this);
+            drawCharacters(g);
             break;
         }
       }

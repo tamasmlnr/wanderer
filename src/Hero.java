@@ -8,7 +8,9 @@ public class Hero extends Creature {
     y = 0;
   }
 
-
+  public void drawHero() {
+    Map.drawCreatre(x, y, this);
+  }
 
   public int getX() {
     return x;

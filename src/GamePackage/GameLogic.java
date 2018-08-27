@@ -1,7 +1,7 @@
-import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
+import Character.Creature;
+import Character.Hero;
 
 public class GameLogic {
   public ArrayList<Creature> characters;

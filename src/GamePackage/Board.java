@@ -65,13 +65,13 @@ public class Board extends JComponent implements KeyListener {
       e.printStackTrace();
     }
     drawStats(g);
-    if (!gameLogic.getHero().alive) g.drawString("Game over",360,360);
+    if (!gameLogic.getHero().alive) g.drawString("Game over", 360, 360);
 
   }
 
   //
   public void drawCharacters(Graphics g) throws IOException {
-    if(gameLogic.getCreatures().isEmpty()) gameLogic.newLevel();
+    if (gameLogic.getCreatures().isEmpty()) gameLogic.newLevel();
     g.drawImage(gameLogic.getHero().currentImage(), gameLogic.getHero().getX(), gameLogic.getHero().getY(), this);
     ArrayList<Creature> creaList = gameLogic.getCreatures();
     for (Creature creature : creaList) {
@@ -79,7 +79,7 @@ public class Board extends JComponent implements KeyListener {
       Font myFont = new Font("Garamond", 0, 12);
       g.setFont(myFont);
       g.setColor(Color.white);
-      g.drawString("HP "+creature.currentHealth+""+" DP " +creature.dp+" SP "+creature.sp+ creature.dp,creature.getX()-20, creature.getY());
+      g.drawString("HP " + creature.currentHealth + "" + " DP " + creature.dp + " SP " + creature.sp, creature.getX() - 20, creature.getY());
     }
 
   }
@@ -94,6 +94,15 @@ public class Board extends JComponent implements KeyListener {
 
   @Override
   public void keyReleased(KeyEvent e) {
+    if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+      if (gameLogic.getEnemyOnTile() != null) {
+        try {
+          gameLogic.battle(gameLogic.getEnemyOnTile());
+        } catch (IOException e1) {
+          e1.printStackTrace();
+        }
+      }
+    }
     if (e.getKeyCode() == KeyEvent.VK_UP) {
       gameLogic.getHero().moveUp();
       gameLogic.randomMoveCreatures();
@@ -106,10 +115,6 @@ public class Board extends JComponent implements KeyListener {
     } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
       gameLogic.getHero().moveRight();
       gameLogic.randomMoveCreatures();
-    }
-     if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-      if(gameLogic.getEnemyOnTile()!=null)
-        gameLogic.battle(gameLogic.getEnemyOnTile());
     }
 
     repaint();

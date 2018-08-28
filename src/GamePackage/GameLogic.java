@@ -2,6 +2,7 @@ package GamePackage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 import Character.*;
@@ -97,32 +98,36 @@ public class GameLogic {
     return null;
   }
 
-  public void battle(Creature enemy) {
+  public void battle(Creature enemy) throws IOException {
+
     while (true) {
       getHero().strike(enemy);
       enemy.strike(getHero());
       if (getHero().currentHealth <= 0) {
-//        getHero().alive=false;
+        getHero().alive = false;
         break;
       }
       if (enemy.getCurrentHealth() <= 0) {
-        creatureDeath(enemy);
         getHero().levelUp();
+        creatureDeath(enemy);
         break;
       }
     }
   }
 
 
-  public void creatureDeath(Creature creature) {
+  public void creatureDeath(Creature creature) throws IOException {
     creatures.remove(creature);
+    if (creature.hasKey) newLevel();
     creature = null;
   }
 
   public void newLevel() throws IOException {
+    creatures.clear();
     currentLevel++;
     addSkeletons(currentLevel);
     addBoss(currentLevel);
+    creatures.get(new Random().nextInt(creatures.size())).hasKey=true;
   }
 }
 

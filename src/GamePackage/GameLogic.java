@@ -85,21 +85,11 @@ public class GameLogic {
   }
 
 
-  public void addCreature(Creature creature, int x, int y) {
-    creatures.add(creature);
-  }
 
   public Hero getHero() {
     return hero;
   }
 
-  public int getX(Creature creature) {
-    return creature.getX();
-  }
-
-  public int getY(Creature creature) {
-    return creature.getY();
-  }
 
   public Creature getEnemyOnTile() {
     for (Creature crea : creatures) {
@@ -116,13 +106,17 @@ public class GameLogic {
       getHero().strike(enemy);
       enemy.strike(getHero());
       if (getHero().currentHealth<0) gameOver();
-      if (enemy.getCurrentHealth()<0) {creatureDeath(enemy); break;}
+      if (enemy.getCurrentHealth()<0) {creatureDeath(enemy);
+      getHero().levelUp();
+      break;}
     }
   }
 
   public boolean gameOver() {
-    if (getHero().currentHealth<0) return true;
-    else return false;
+    if (getHero().currentHealth<0)
+    {hero.alive=false;
+      return true;}
+    return false;
   }
 
     public void creatureDeath(Creature creature) {

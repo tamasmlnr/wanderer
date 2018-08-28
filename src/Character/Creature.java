@@ -18,7 +18,7 @@ public class Creature {
   public int maxHealth;
   public double dp = 0;
   public int sp = 0;
-  public boolean hasKey=false;
+  public boolean hasKey = false;
 
   public double getDp() {
     return dp;
@@ -142,10 +142,10 @@ public class Creature {
   }
 
   public void strike(Creature enemy) {
-    int sv=2*GameLogic.d6()+sp;
+    int sv = 2 * GameLogic.d6() + sp;
     if (sv > enemy.dp) {
-      System.out.println(enemy+" "+sv);
-        enemy.currentHealth -= sv - enemy.dp;
+      System.out.println(enemy + " " + sv);
+      enemy.currentHealth -= sv - enemy.dp;
     }
   }
 

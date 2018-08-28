@@ -30,7 +30,7 @@ public class Board extends JComponent implements KeyListener {
     g.drawString("Level: " + gameLogic.getHero().getLevel()
             + "     Health: " + gameLogic.getHero().getCurrentHealth()
             + "/" + gameLogic.getHero().getMaxHealth()
-            + "     Defend point: " + gameLogic.getHero().getDp()
+            + "     Defend point: " + Math.round(gameLogic.getHero().getDp())
             + "     Strike point: " + gameLogic.getHero().getSp()
         , +20, 738);
   }

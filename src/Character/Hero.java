@@ -6,6 +6,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Random;
 
 public class Hero extends Creature {
   public BufferedImage heroImgDown = ImageIO.read(new File("img/hero-down.png"));
@@ -21,7 +22,7 @@ public class Hero extends Creature {
     level = 1;
     maxHealth = 20 + 3 * GameLogic.d6();
     dp = 2 * GameLogic.d6();
-    sp = 5 + GameLogic.d6();
+    sp = 2 + GameLogic.d6();
     this.currentHealth = maxHealth;
     alive = true;
   }
@@ -63,7 +64,17 @@ public class Hero extends Creature {
   public void levelUp() {
     level++;
     maxHealth += GameLogic.d6();
-    dp += GameLogic.d6();
+    dp += GameLogic.d6()*0.6;
     sp += GameLogic.d6();
   }
+  public void getLevelBonus() {
+    Random random = new Random();
+    double x = random.nextDouble();
+    if (0.5>x) currentHealth=(int)(currentHealth*1.1);
+    if (0.5<=x&&0.9>x) currentHealth=(int)(currentHealth*1.3);
+    if (0.9<x) currentHealth=(int)(currentHealth=maxHealth);
+    if (currentHealth>maxHealth) currentHealth=maxHealth;
+  }
+
 }
+

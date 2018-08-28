@@ -30,6 +30,19 @@ public class GameLogic {
     addHero();
   }
 
+  public void generateRandomMap() {
+    for (int i = 0; i < GameLogic.mapArray.length; i++) {
+      for (int j = 0; j < GameLogic.mapArray[0].length; j++) {
+        Random random = new Random();
+        double x = random.nextDouble();
+        if(x>0.3)
+        mapArray[i][j] = 1;
+        if(x<=0.3)
+          mapArray[i][j] = 0;
+      }
+    }
+  }
+
   public static int d6() {
     Random rn = new Random();
     return rn.nextInt(5) + 1;
@@ -128,6 +141,8 @@ public class GameLogic {
     addSkeletons(currentLevel);
     addBoss(currentLevel);
     creatures.get(new Random().nextInt(creatures.size())).hasKey=true;
+    getHero().getLevelBonus();
+    if (currentLevel>1) generateRandomMap();
   }
 }
 

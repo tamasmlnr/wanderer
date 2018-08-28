@@ -65,7 +65,7 @@ public class Board extends JComponent implements KeyListener {
       e.printStackTrace();
     }
     drawStats(g);
-    if (gameLogic.gameOver()) g.drawString("Game over",360,360);
+    if (!gameLogic.getHero().alive) g.drawString("Game over",360,360);
 
   }
 
@@ -109,7 +109,6 @@ public class Board extends JComponent implements KeyListener {
     }
      if (e.getKeyCode() == KeyEvent.VK_SPACE) {
       if(gameLogic.getEnemyOnTile()!=null)
-//      gameLogic.getHero().battle(gameLogic.getEnemyOnTile());
         gameLogic.battle(gameLogic.getEnemyOnTile());
     }
 

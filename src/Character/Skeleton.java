@@ -12,10 +12,10 @@ public class Skeleton extends Creature {
 
   public Skeleton(int x, int y, int level) throws IOException {
     super(x, y);
-    this.level=level;
+    this.level=3;
     maxHealth=2*level*GameLogic.d6();
     currentHealth=maxHealth;
-    dp=(level*0.5)*(double)GameLogic.d6();
+    dp=(level*0.5)*GameLogic.d6()*100;
     sp=level*GameLogic.d6();
   }
 

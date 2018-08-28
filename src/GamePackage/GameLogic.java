@@ -9,7 +9,7 @@ import Character.*;
 public class GameLogic {
   public ArrayList<Creature> creatures;
   Hero hero;
-  public int currentLevel=0;
+  public int currentLevel = 0;
 
   public static int[][] mapArray = new int[][]
       {{1, 1, 1, 0, 1, 0, 1, 1, 1, 1},
@@ -73,7 +73,6 @@ public class GameLogic {
   public static boolean isPassable(int[] tile) {
     int x = tile[0] / 72;
     int y = tile[1] / 72;
-
     if (mapArray[y][x] == 0) return false;
     return true;
   }
@@ -84,8 +83,6 @@ public class GameLogic {
     }
   }
 
-
-
   public Hero getHero() {
     return hero;
   }
@@ -93,7 +90,6 @@ public class GameLogic {
 
   public Creature getEnemyOnTile() {
     for (Creature crea : creatures) {
-//      if (crea.currentPos().equals(getHero().currentPos())) {
       if ((crea.currentPos()[0] - getHero().currentPos()[0]) == 0 && (crea.currentPos()[1] - getHero().currentPos()[1]) == 0) {
         return crea;
       }
@@ -105,30 +101,30 @@ public class GameLogic {
     while (true) {
       getHero().strike(enemy);
       enemy.strike(getHero());
-      if (getHero().currentHealth<0) gameOver();
-      if (enemy.getCurrentHealth()<0) {creatureDeath(enemy);
-      getHero().levelUp();
-      break;}
+      if (getHero().currentHealth <= 0) {
+//        getHero().alive=false;
+        break;
+      }
+      if (enemy.getCurrentHealth() <= 0) {
+        creatureDeath(enemy);
+        getHero().levelUp();
+        break;
+      }
     }
   }
 
-  public boolean gameOver() {
-    if (getHero().currentHealth<0)
-    {hero.alive=false;
-      return true;}
-    return false;
-  }
 
-    public void creatureDeath(Creature creature) {
+  public void creatureDeath(Creature creature) {
     creatures.remove(creature);
-    }
-
-    public void newLevel() throws IOException {
-    currentLevel++;
-      addSkeletons(currentLevel);
-      addBoss(currentLevel);
-    }
+    creature = null;
   }
+
+  public void newLevel() throws IOException {
+    currentLevel++;
+    addSkeletons(currentLevel);
+    addBoss(currentLevel);
+  }
+}
 
 
 

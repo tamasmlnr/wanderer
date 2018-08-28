@@ -20,6 +20,7 @@ public class Hero extends Creature {
     maxHealth=20+3* GameLogic.d6();
     dp=2* GameLogic.d6();
     sp=5+ GameLogic.d6();
+    this.currentHealth=maxHealth;
   }
 
   public int getLevel() {
@@ -31,5 +32,10 @@ public class Hero extends Creature {
     if (lastMovement == "right") return heroImgRight;
     if (lastMovement == "up") return heroImgUp;
     return heroImgDown;
+  }
+
+  public void levelUp() {
+    level++;
+
   }
 }

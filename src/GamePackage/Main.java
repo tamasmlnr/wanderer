@@ -6,7 +6,7 @@ import java.io.IOException;
 public class Main {
 
   public static void main(String[] args) throws IOException {
-    JFrame frame = new JFrame("RPG Game");
+    JFrame frame = new JFrame("Wanderer");
     Board board = new Board();
     frame.add(board);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

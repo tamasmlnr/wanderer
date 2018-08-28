@@ -13,8 +13,8 @@ public class Creature {
   public int y;
   public String lastMovement;
   public int level=0;
-  public int maxHealth=0;
-  public int currentHealth=0;
+  public int currentHealth;
+  public int maxHealth;
   public double dp=0;
   public int sp=0;
 
@@ -106,11 +106,12 @@ public class Creature {
   }
   }
 
-  public void Strike(Creature enemy){
-    //
-    if(this.currentPos()==enemy.currentPos()&&(2*GameLogic.d6()>enemy.dp)){
+  public void strike(Creature enemy){//
+    if((2*GameLogic.d6()>enemy.dp)){
+      if(sp-enemy.dp>0)
     enemy.currentHealth-=sp-enemy.dp;
     }
   }
+
 
 }

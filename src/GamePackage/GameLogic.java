@@ -9,7 +9,7 @@ import Character.*;
 public class GameLogic {
   public ArrayList<Creature> creatures;
   Hero hero;
-  public boolean passable;
+  public int currentLevel=0;
 
   public static int[][] mapArray = new int[][]
       {{1, 1, 1, 0, 1, 0, 1, 1, 1, 1},
@@ -24,8 +24,9 @@ public class GameLogic {
           {1, 1, 1, 0, 1, 0, 0, 1, 1, 1},};
 
 
-  public GameLogic() {
+  public GameLogic() throws IOException {
     creatures = new ArrayList<>();
+    addHero();
   }
 
   public static int d6() {
@@ -102,16 +103,39 @@ public class GameLogic {
 
   public Creature getEnemyOnTile() {
     for (Creature crea : creatures) {
-      System.out.print("enemy:"+crea.currentPos()[0]/72);
-      System.out.println(crea.currentPos()[1]/72);
-      System.out.print("hero:"+getHero().currentPos()[0]/72);
-      System.out.println(getHero().currentPos()[1]/72);
-      if (crea.currentPos() == getHero().currentPos()) {
+//      if (crea.currentPos().equals(getHero().currentPos())) {
+      if ((crea.currentPos()[0] - getHero().currentPos()[0]) == 0 && (crea.currentPos()[1] - getHero().currentPos()[1]) == 0) {
         return crea;
       }
     }
     return null;
   }
-}
+
+  public void battle(Creature enemy) {
+    while (true) {
+      getHero().strike(enemy);
+      enemy.strike(getHero());
+      if (getHero().currentHealth<0) gameOver();
+      if (enemy.getCurrentHealth()<0) {creatureDeath(enemy); break;}
+    }
+  }
+
+  public boolean gameOver() {
+    if (getHero().currentHealth<0) return true;
+    else return false;
+  }
+
+    public void creatureDeath(Creature creature) {
+    creatures.remove(creature);
+    }
+
+    public void newLevel() throws IOException {
+    currentLevel++;
+      addSkeletons(currentLevel);
+      addBoss(currentLevel);
+    }
+  }
+
+
 
 

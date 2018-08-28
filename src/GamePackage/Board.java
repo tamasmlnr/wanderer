@@ -17,9 +17,6 @@ public class Board extends JComponent implements KeyListener {
 
   public Board() throws IOException {
     gameLogic = new GameLogic();
-    gameLogic.addHero();
-    gameLogic.addSkeletons(1);
-    gameLogic.addBoss(1);
     setPreferredSize(new Dimension(720, 750));
     setVisible(true);
   }
@@ -68,18 +65,21 @@ public class Board extends JComponent implements KeyListener {
       e.printStackTrace();
     }
     drawStats(g);
+    if (gameLogic.gameOver()) g.drawString("Game over",360,360);
+
   }
 
   //
   public void drawCharacters(Graphics g) throws IOException {
+    if(gameLogic.getCreatures().isEmpty()) gameLogic.newLevel();
     g.drawImage(gameLogic.getHero().currentImage(), gameLogic.getHero().getX(), gameLogic.getHero().getY(), this);
     ArrayList<Creature> creaList = gameLogic.getCreatures();
     for (Creature creature : creaList) {
       g.drawImage(creature.currentImage(), creature.getX(), creature.getY(), this);
-      Font myFont = new Font("Garamond", 0, 17);
+      Font myFont = new Font("Garamond", 0, 12);
       g.setFont(myFont);
       g.setColor(Color.white);
-      g.drawString(creature.currentHealth+"",creature.getX()+32, creature.getY());
+      g.drawString("HP "+creature.currentHealth+""+" DP " +creature.dp+" SP "+creature.sp+ creature.dp,creature.getX()-20, creature.getY());
     }
 
   }
@@ -105,10 +105,12 @@ public class Board extends JComponent implements KeyListener {
       gameLogic.randomMoveCreatures();
     } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
       gameLogic.getHero().moveRight();
+      gameLogic.randomMoveCreatures();
     }
      if (e.getKeyCode() == KeyEvent.VK_SPACE) {
       if(gameLogic.getEnemyOnTile()!=null)
-      gameLogic.getHero().Strike(gameLogic.getEnemyOnTile());
+//      gameLogic.getHero().battle(gameLogic.getEnemyOnTile());
+        gameLogic.battle(gameLogic.getEnemyOnTile());
     }
 
     repaint();

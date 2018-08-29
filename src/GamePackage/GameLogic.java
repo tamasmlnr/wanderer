@@ -85,19 +85,68 @@ public class GameLogic {
     hero = new Hero();
   }
 
+//  public int[] generateRandomSpawn() {
+//    Random rn = new Random();
+//    int[] co = new int[2];
+//    while (true) {
+//      int x = rn.nextInt(9) + 1;
+//      int y = rn.nextInt(9) + 1;
+//      co[0] = x * 72;
+//      co[1] = y * 72;
+//      if (GameLogic.isPassable(co)) {
+//        return co;
+//      } else generateRandomSpawn();
+//    }
+//  }
+
+
+//  public int[] generateRandomSpawn() {
+//    Random rn = new Random();
+//    int[] co = new int[2];
+//    while (true) {
+//      int x = rn.nextInt(9) + 1;
+//      int y = rn.nextInt(9) + 1;
+//      co[0] = x * 72;
+//      co[1] = y * 72;
+//      if (GameLogic.isPassable(co)) {
+//        return co;
+//      } else generateRandomSpawn();
+//    }
+//  }
+
   public int[] generateRandomSpawn() {
-    Random rn = new Random();
-    int[] co = new int[2];
+  int[] co = new int[2];
     while (true) {
-      int x = rn.nextInt(9) + 1;
-      int y = rn.nextInt(9) + 1;
-      co[0] = x * 72;
-      co[1] = y * 72;
-      if (GameLogic.isPassable(co)) {
-        return co;
-      } else generateRandomSpawn();
-    }
+      Random rn = new Random();
+    int x = rn.nextInt(9) + 1;
+    int y = rn.nextInt(9) + 1;
+    co[0] = x * 72;
+    co[1] = y * 72;
+    if (isPassable(co)) break;
   }
+    return co;
+}
+
+//  public int[] generateRandomSpawn() {
+//    ArrayList<int[]> passablePositions = new ArrayList();
+//    for(int x=0;x<mapArray.length;x++)
+//    for (int y = 0; y < mapArray[x].length ; y++) {
+//      if (mapArray[x][y]==1) passablePositions.add(mapArray[x][y]);
+//    }
+//    Random rn = new Random();
+//    int[] co = new int[2];
+//    while (true) {
+//      int x = rn.nextInt(9) + 1;
+//      int y = rn.nextInt(9) + 1;
+//      co[0] = x * 72;
+//      co[1] = y * 72;
+//      if (GameLogic.isPassable(co)) {
+//        return co;
+//      } else generateRandomSpawn();
+//    }
+//  }
+
+
 
 
   public void addSkeletons(int level) throws IOException {

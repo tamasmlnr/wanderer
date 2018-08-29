@@ -23,7 +23,7 @@ public class Hero extends Creature {
     maxHealth = 20 + 3 * GameLogic.d6();
     dp = 2 * GameLogic.d6();
     sp = 2 + GameLogic.d6();
-    this.currentHealth = 1;
+    this.currentHealth = maxHealth;
     alive = true;
   }
 

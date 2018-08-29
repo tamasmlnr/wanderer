@@ -94,28 +94,6 @@ public class Creature {
     if ((y > 0) && GameLogic.isPassable(targetPos)) y -= 72;
   }
 
-//
-//  public void randomMove() {
-//    Random rn = new Random();
-//    if (Hero.stepCount % 2 == 0) {
-//      int x = rn.nextInt(3);
-//      switch (x) {
-//        case 0:
-//          moveUp();
-//          break;
-//        case 1:
-//          moveDown();
-//          break;
-//        case 2:
-//          moveRight();
-//          break;
-//        case 3:
-//          moveLeft();
-//          break;
-//      }
-//    }
-//  }
-
   public void randomMove() {
     int[] newPos = availableTiles();
       x = newPos[0];

@@ -18,7 +18,7 @@ import java.util.TimerTask;
 public class Board extends JComponent implements KeyListener {
   public static final int WIDTH = 720;
   public static final int HEIGHT = 720;
-  public static int updateTime=1000;
+  public static int updateTime=1500;
   GameLogic gameLogic;
   public BufferedImage gameOver = ImageIO.read(new File("img/gameover.png"));
 

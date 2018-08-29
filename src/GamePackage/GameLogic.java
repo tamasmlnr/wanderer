@@ -52,26 +52,33 @@ public class GameLogic {
     int x = 0;
     int y = 0;
     GameLogic.mapArray[x][y] = 1;
-    for (int i = 0; i < 200; i++) {
-      int randomPick = random.nextInt(4);
-      if (randomPick == 0 && (x - 1) > 0) x -= 1;
-      GameLogic.mapArray[x][y] = 1;
-      if (randomPick == 1 && (y + 1) < 10) y += 1;
-      GameLogic.mapArray[x][y] = 1;
-      if (randomPick == 2 && (x + 1) < 10) x += 1;
-      GameLogic.mapArray[x][y] = 1;
-      if (randomPick == 3 && (y - 1) > 0) y -= 1;
-      GameLogic.mapArray[x][y] = 1;
-    }
-    while (y > 2) {
-      y -= 1;
-      GameLogic.mapArray[x][y] = 1;
-    }
-    while (x > 2) {
-      x -= 1;
-      GameLogic.mapArray[x][y] = 1;
-    }
-
+    for (int i = 0; i < 101; i++) {
+      int randomPick = random.nextInt(8);
+      if (randomPick == 1&&y<9) {
+        int r= random.nextInt(8)+1;
+        while (y<r+1) {
+        y ++;
+        GameLogic.mapArray[x][y] = 1;
+      }}
+      if (randomPick == 2&&0<y) {
+        int r= random.nextInt(y);
+        while (y>r) {
+          y --;
+          GameLogic.mapArray[x][y] = 1;
+        }}
+      if (randomPick == 3&&x<9) {
+      int r= random.nextInt(8)+1;
+        while (x<r+1) {
+          x ++;
+          GameLogic.mapArray[x][y] = 1;
+        }}
+      if (randomPick == 4&&0<x) {
+        int r= random.nextInt(x);
+        while (x>r) {
+          x --;
+          GameLogic.mapArray[x][y] = 1;
+        }}
+        
 
   }
 
@@ -99,55 +106,18 @@ public class GameLogic {
 //    }
 //  }
 
-
-//  public int[] generateRandomSpawn() {
-//    Random rn = new Random();
-//    int[] co = new int[2];
-//    while (true) {
-//      int x = rn.nextInt(9) + 1;
-//      int y = rn.nextInt(9) + 1;
-//      co[0] = x * 72;
-//      co[1] = y * 72;
-//      if (GameLogic.isPassable(co)) {
-//        return co;
-//      } else generateRandomSpawn();
-//    }
-//  }
-
   public int[] generateRandomSpawn() {
-  int[] co = new int[2];
+    int[] co = new int[2];
     while (true) {
       Random rn = new Random();
-    int x = rn.nextInt(9) + 1;
-    int y = rn.nextInt(9) + 1;
-    co[0] = x * 72;
-    co[1] = y * 72;
-    if (isPassable(co)) break;
-  }
+      int x = rn.nextInt(9) + 1;
+      int y = rn.nextInt(9) + 1;
+      co[0] = x * 72;
+      co[1] = y * 72;
+      if (isPassable(co)) break;
+    }
     return co;
-}
-
-//  public int[] generateRandomSpawn() {
-//    ArrayList<int[]> passablePositions = new ArrayList();
-//    for(int x=0;x<mapArray.length;x++)
-//    for (int y = 0; y < mapArray[x].length ; y++) {
-//      if (mapArray[x][y]==1) passablePositions.add(mapArray[x][y]);
-//    }
-//    Random rn = new Random();
-//    int[] co = new int[2];
-//    while (true) {
-//      int x = rn.nextInt(9) + 1;
-//      int y = rn.nextInt(9) + 1;
-//      co[0] = x * 72;
-//      co[1] = y * 72;
-//      if (GameLogic.isPassable(co)) {
-//        return co;
-//      } else generateRandomSpawn();
-//    }
-//  }
-
-
-
+  }
 
   public void addSkeletons(int level) throws IOException {
     int[] skelPos;
@@ -179,10 +149,11 @@ public class GameLogic {
       creature.randomMove();
       if (creature.x == hero.x && creature.y == hero.y) toRemove.add(battle(creature, getHero()));
     }
-    if (!toRemove.contains(null)){
-    for (Creature crea: toRemove) {
-      creatureDeath(crea);
-    }}
+    if (!toRemove.contains(null)) {
+      for (Creature crea : toRemove) {
+        creatureDeath(crea);
+      }
+    }
   }
 
   public Hero getHero() {
@@ -230,7 +201,7 @@ public class GameLogic {
 //  }
 
   public Creature battle(Creature attacker, Creature enemy) throws IOException {
-    System.out.println("Attacker: "+attacker);
+    System.out.println("Attacker: " + attacker);
     if (attacker.equals(getHero())) {
       while (true) {
         getHero().strike(enemy);
@@ -258,7 +229,7 @@ public class GameLogic {
       }
     }
 
-return null;
+    return null;
   }
 
 
@@ -277,7 +248,7 @@ return null;
     addBoss(currentLevel);
     creatures.get(new Random().nextInt(creatures.size())).hasKey = true;
     getHero().getLevelBonus();
-    if (Board.updateTime>300) Board.updateTime-=100;
+    if (Board.updateTime > 300) Board.updateTime -= 100;
   }
 }
 

@@ -1,6 +1,7 @@
 package Character;
 
 import GamePackage.GameLogic;
+import GamePackage.PositionedImage;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;

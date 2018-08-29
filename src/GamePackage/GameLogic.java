@@ -1,10 +1,7 @@
 package GamePackage;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.Random;
+import java.util.*;
 
 import Character.*;
 
@@ -31,6 +28,19 @@ public class GameLogic {
     addHero();
   }
 
+//  public void randomMoveEveryX() {
+//    Timer t = new Timer();
+//    t.schedule(new TimerTask() {
+//      @Override
+//      public void run() {
+//        try {
+//          randomMoveCreatures();
+//        } catch (IOException e) {
+//          e.printStackTrace();
+//        }
+//      }
+//    }, 0, 1000);
+//  }
 
   public void generateRandomMap() {
     for (int i = 0; i < GameLogic.mapArray.length; i++) {
@@ -44,7 +54,6 @@ public class GameLogic {
     GameLogic.mapArray[x][y] = 1;
     for (int i = 0; i < 200; i++) {
       int randomPick = random.nextInt(4);
-      System.out.println(randomPick);
       if (randomPick == 0 && (x - 1) > 0) x -= 1;
       GameLogic.mapArray[x][y] = 1;
       if (randomPick == 1 && (y + 1) < 10) y += 1;
@@ -121,9 +130,10 @@ public class GameLogic {
       creature.randomMove();
       if (creature.x == hero.x && creature.y == hero.y) toRemove.add(battle(creature, getHero()));
     }
+    if (!toRemove.contains(null)){
     for (Creature crea: toRemove) {
       creatureDeath(crea);
-    }
+    }}
   }
 
   public Hero getHero() {
@@ -139,32 +149,46 @@ public class GameLogic {
     }
     return null;
   }
-
-//  public void battle(Creature enemy) throws IOException {
-//
-//    while (true) {
-//      getHero().strike(enemy);
-//      if (enemy.getCurrentHealth() <= 0) {
-//        getHero().levelUp();
-//        creatureDeath(enemy);
-//        break;
+//  public Creature battle(Creature attacker, Creature enemy) throws IOException {
+//    if (attacker.equals(getHero())) {
+//      while (true) {
+//        getHero().strike(enemy);
+//        if (enemy.getCurrentHealth() <= 0) {
+//          getHero().levelUp();
+//          creatureDeath(enemy);
+//          return attacker;
+//        }
+//        enemy.strike(getHero());
+//        if (getHero().currentHealth <= 0) {
+//          getHero().alive = false;
+//          break;
+//        }
 //      }
-//      enemy.strike(getHero());
+//    } else while (true) {
+//      attacker.strike(getHero());
 //      if (getHero().currentHealth <= 0) {
 //        getHero().alive = false;
 //        break;
 //      }
+//      getHero().strike(attacker);
+//      if (attacker.getCurrentHealth() <= 0) {
+//        getHero().levelUp();
+//        return attacker;
+//      }
 //    }
+//
+//    return null;
 //  }
 
   public Creature battle(Creature attacker, Creature enemy) throws IOException {
+    System.out.println("Attacker: "+attacker);
     if (attacker.equals(getHero())) {
       while (true) {
         getHero().strike(enemy);
         if (enemy.getCurrentHealth() <= 0) {
           getHero().levelUp();
-//          creatureDeath(enemy);
-          return attacker;
+          creatureDeath(enemy);
+          return enemy;
         }
         enemy.strike(getHero());
         if (getHero().currentHealth <= 0) {
@@ -192,7 +216,6 @@ return null;
   public void creatureDeath(Creature creature) throws IOException {
     creatures.remove(creature);
     if (creature.hasKey) newLevel();
-    creature = null;
   }
 
   public void newLevel() throws IOException {
@@ -205,6 +228,7 @@ return null;
     addBoss(currentLevel);
     creatures.get(new Random().nextInt(creatures.size())).hasKey = true;
     getHero().getLevelBonus();
+    if (Board.updateTime>300) Board.updateTime-=100;
   }
 }
 

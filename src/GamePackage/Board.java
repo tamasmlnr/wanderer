@@ -12,10 +12,13 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Board extends JComponent implements KeyListener {
   public static final int WIDTH = 720;
   public static final int HEIGHT = 720;
+  public static int updateTime=1000;
   GameLogic gameLogic;
   public BufferedImage gameOver = ImageIO.read(new File("img/gameover.png"));
 
@@ -23,6 +26,7 @@ public class Board extends JComponent implements KeyListener {
     gameLogic = new GameLogic();
     setPreferredSize(new Dimension(720, 750));
     setVisible(true);
+    randomMoveEveryX();
   }
 
   public void drawStats(Graphics g) {
@@ -42,7 +46,6 @@ public class Board extends JComponent implements KeyListener {
   @Override
   public void paint(Graphics g) {
     super.paint(g);
-
     for (int x = 0; x < 10; x++) {
       for (int y = 0; y < 10; y++) {
 
@@ -109,37 +112,31 @@ public class Board extends JComponent implements KeyListener {
     }
     if (e.getKeyCode() == KeyEvent.VK_UP) {
       gameLogic.getHero().moveUp();
-      try {
-        gameLogic.randomMoveCreatures();
-      } catch (IOException e1) {
-        e1.printStackTrace();
-      }
     } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
       gameLogic.getHero().moveDown();
-      try {
-        gameLogic.randomMoveCreatures();
-      } catch (IOException e1) {
-        e1.printStackTrace();
-      }
     } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
       gameLogic.getHero().moveLeft();
-      try {
-        gameLogic.randomMoveCreatures();
-      } catch (IOException e1) {
-        e1.printStackTrace();
-      }
     } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
       gameLogic.getHero().moveRight();
-      try {
-        gameLogic.randomMoveCreatures();
-      } catch (IOException e1) {
-        e1.printStackTrace();
-      }
     }
     else if (e.getKeyCode() == KeyEvent.VK_L) {
       gameLogic.generateRandomMap();
     }
+        repaint();
+  }
 
-    repaint();
+  public void randomMoveEveryX() {
+    java.util.Timer t = new Timer();
+    t.schedule(new TimerTask() {
+      @Override
+      public void run() {
+        try {
+          gameLogic.randomMoveCreatures();
+          repaint();
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+      }
+    }, 0, 1000);
   }
 }

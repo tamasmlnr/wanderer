@@ -15,7 +15,7 @@ public class Hero extends Creature {
   public BufferedImage heroImgRight = ImageIO.read(new File("img/hero-right.png"));
   public BufferedImage heroDead = ImageIO.read(new File("img/hero-dead.png"));
   public boolean alive;
-  public static int stepCount = 0;
+//  public static int stepCount = 0;
 
   public Hero() throws IOException {
     super(0, 0);
@@ -23,28 +23,28 @@ public class Hero extends Creature {
     maxHealth = 20 + 3 * GameLogic.d6();
     dp = 2 * GameLogic.d6();
     sp = 2 + GameLogic.d6();
-    this.currentHealth = maxHealth;
+    this.currentHealth = 1;
     alive = true;
   }
 
   public void moveRight() {
-    stepCount++;
+//    stepCount++;
     if (alive)
       super.moveRight();
   }
 
   public void moveLeft() {
-    stepCount++;
+//    stepCount++;
     if (alive) super.moveLeft();
   }
 
   public void moveUp() {
-    stepCount++;
+//    stepCount++;
     if (alive) super.moveUp();
   }
 
   public void moveDown() {
-    stepCount++;
+//    stepCount++;
     if (alive) super.moveDown();
   }
 

@@ -118,10 +118,8 @@ public class Creature {
 
   public void randomMove() {
     int[] newPos = availableTiles();
-    if (Hero.stepCount % 2 == 0) {
       x = newPos[0];
       y = newPos[1];
-    }
   }
 
   public int[] availableTiles() {

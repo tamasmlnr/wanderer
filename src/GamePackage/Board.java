@@ -79,6 +79,7 @@ public class Board extends JComponent implements KeyListener {
   //
   public void drawCharacters(Graphics g) throws IOException {
     if (gameLogic.getCreatures().isEmpty()) gameLogic.newLevel();
+
     g.drawImage(gameLogic.getHero().currentImage(), gameLogic.getHero().getX(), gameLogic.getHero().getY(), this);
     ArrayList<Creature> creaList = gameLogic.getCreatures();
     for (Creature creature : creaList) {

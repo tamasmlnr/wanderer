@@ -94,6 +94,8 @@ public class Creature {
     if ((y > 0) && GameLogic.isPassable(targetPos)) y -= 72;
   }
 
+
+
   public void randomMove() {
     int[] newPos = availableTiles();
       x = newPos[0];

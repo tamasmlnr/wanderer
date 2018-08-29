@@ -3,6 +3,7 @@ package GamePackage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.Random;
 
 import Character.*;
@@ -30,18 +31,6 @@ public class GameLogic {
     addHero();
   }
 
-//  public void generateRandomMap() {
-//    for (int i = 0; i < GameLogic.mapArray.length; i++) {
-//      for (int j = 0; j < GameLogic.mapArray[0].length; j++) {
-//        Random random = new Random();
-//        double x = random.nextDouble();
-//        if(x>0.3)
-//        mapArray[i][j] = 1;
-//        if(x<=0.3)
-//          mapArray[i][j] = 0;
-//      }
-//    }
-//  }
 
   public void generateRandomMap() {
     for (int i = 0; i < GameLogic.mapArray.length; i++) {
@@ -126,9 +115,14 @@ public class GameLogic {
     return true;
   }
 
-  public void randomMoveCreatures() {
+  public void randomMoveCreatures() throws IOException {
+    ArrayList<Creature> toRemove = new ArrayList<Creature>();
     for (Creature creature : creatures) {
       creature.randomMove();
+      if (creature.x == hero.x && creature.y == hero.y) toRemove.add(battle(creature, getHero()));
+    }
+    for (Creature crea: toRemove) {
+      creatureDeath(crea);
     }
   }
 
@@ -163,21 +157,35 @@ public class GameLogic {
 //    }
 //  }
 
-  public void battle(Creature enemy) throws IOException {
-
-    while (true) {
-      getHero().strike(enemy);
-      if (enemy.getCurrentHealth() <= 0) {
-        getHero().levelUp();
-        creatureDeath(enemy);
-        break;
+  public Creature battle(Creature attacker, Creature enemy) throws IOException {
+    if (attacker.equals(getHero())) {
+      while (true) {
+        getHero().strike(enemy);
+        if (enemy.getCurrentHealth() <= 0) {
+          getHero().levelUp();
+//          creatureDeath(enemy);
+          return attacker;
+        }
+        enemy.strike(getHero());
+        if (getHero().currentHealth <= 0) {
+          getHero().alive = false;
+          break;
+        }
       }
-      enemy.strike(getHero());
+    } else while (true) {
+      attacker.strike(getHero());
       if (getHero().currentHealth <= 0) {
         getHero().alive = false;
         break;
       }
+      getHero().strike(attacker);
+      if (attacker.getCurrentHealth() <= 0) {
+        getHero().levelUp();
+        return attacker;
+      }
     }
+
+return null;
   }
 
 
@@ -197,7 +205,6 @@ public class GameLogic {
     addBoss(currentLevel);
     creatures.get(new Random().nextInt(creatures.size())).hasKey = true;
     getHero().getLevelBonus();
-
   }
 }
 

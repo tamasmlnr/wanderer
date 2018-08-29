@@ -101,7 +101,7 @@ public class Board extends JComponent implements KeyListener {
     if (e.getKeyCode() == KeyEvent.VK_SPACE) {
       if (gameLogic.getEnemyOnTile() != null) {
         try {
-          gameLogic.battle(gameLogic.getEnemyOnTile());
+          gameLogic.battle(gameLogic.getHero(),gameLogic.getEnemyOnTile());
         } catch (IOException e1) {
           e1.printStackTrace();
         }
@@ -109,16 +109,32 @@ public class Board extends JComponent implements KeyListener {
     }
     if (e.getKeyCode() == KeyEvent.VK_UP) {
       gameLogic.getHero().moveUp();
-      gameLogic.randomMoveCreatures();
+      try {
+        gameLogic.randomMoveCreatures();
+      } catch (IOException e1) {
+        e1.printStackTrace();
+      }
     } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
       gameLogic.getHero().moveDown();
-      gameLogic.randomMoveCreatures();
+      try {
+        gameLogic.randomMoveCreatures();
+      } catch (IOException e1) {
+        e1.printStackTrace();
+      }
     } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
       gameLogic.getHero().moveLeft();
-      gameLogic.randomMoveCreatures();
+      try {
+        gameLogic.randomMoveCreatures();
+      } catch (IOException e1) {
+        e1.printStackTrace();
+      }
     } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
       gameLogic.getHero().moveRight();
-      gameLogic.randomMoveCreatures();
+      try {
+        gameLogic.randomMoveCreatures();
+      } catch (IOException e1) {
+        e1.printStackTrace();
+      }
     }
     else if (e.getKeyCode() == KeyEvent.VK_L) {
       gameLogic.generateRandomMap();

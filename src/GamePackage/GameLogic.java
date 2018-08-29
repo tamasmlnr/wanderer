@@ -28,20 +28,6 @@ public class GameLogic {
     addHero();
   }
 
-//  public void randomMoveEveryX() {
-//    Timer t = new Timer();
-//    t.schedule(new TimerTask() {
-//      @Override
-//      public void run() {
-//        try {
-//          randomMoveCreatures();
-//        } catch (IOException e) {
-//          e.printStackTrace();
-//        }
-//      }
-//    }, 0, 1000);
-//  }
-
   public void generateRandomMap() {
     for (int i = 0; i < GameLogic.mapArray.length; i++) {
       for (int j = 0; j < GameLogic.mapArray[0].length; j++) {
@@ -54,32 +40,35 @@ public class GameLogic {
     GameLogic.mapArray[x][y] = 1;
     for (int i = 0; i < 101; i++) {
       int randomPick = random.nextInt(8);
-      if (randomPick == 1&&y<9) {
-        int r= random.nextInt(8)+1;
-        while (y<r+1) {
-        y ++;
-        GameLogic.mapArray[x][y] = 1;
-      }}
-      if (randomPick == 2&&0<y) {
-        int r= random.nextInt(y);
-        while (y>r) {
-          y --;
+      if (randomPick == 1 && y < 9) {
+        int r = random.nextInt(8) + 1;
+        while (y < r + 1) {
+          y++;
           GameLogic.mapArray[x][y] = 1;
-        }}
-      if (randomPick == 3&&x<9) {
-      int r= random.nextInt(8)+1;
-        while (x<r+1) {
-          x ++;
+        }
+      }
+      if (randomPick == 2 && 0 < y) {
+        int r = random.nextInt(y);
+        while (y > r) {
+          y--;
           GameLogic.mapArray[x][y] = 1;
-        }}
-      if (randomPick == 4&&0<x) {
-        int r= random.nextInt(x);
-        while (x>r) {
-          x --;
+        }
+      }
+      if (randomPick == 3 && x < 9) {
+        int r = random.nextInt(8) + 1;
+        while (x < r + 1) {
+          x++;
           GameLogic.mapArray[x][y] = 1;
-        }}
-        
-
+        }
+      }
+      if (randomPick == 4 && 0 < x) {
+        int r = random.nextInt(x);
+        while (x > r) {
+          x--;
+          GameLogic.mapArray[x][y] = 1;
+        }
+      }
+    }
   }
 
 
@@ -91,20 +80,6 @@ public class GameLogic {
   public void addHero() throws IOException {
     hero = new Hero();
   }
-
-//  public int[] generateRandomSpawn() {
-//    Random rn = new Random();
-//    int[] co = new int[2];
-//    while (true) {
-//      int x = rn.nextInt(9) + 1;
-//      int y = rn.nextInt(9) + 1;
-//      co[0] = x * 72;
-//      co[1] = y * 72;
-//      if (GameLogic.isPassable(co)) {
-//        return co;
-//      } else generateRandomSpawn();
-//    }
-//  }
 
   public int[] generateRandomSpawn() {
     int[] co = new int[2];
@@ -169,36 +144,6 @@ public class GameLogic {
     }
     return null;
   }
-//  public Creature battle(Creature attacker, Creature enemy) throws IOException {
-//    if (attacker.equals(getHero())) {
-//      while (true) {
-//        getHero().strike(enemy);
-//        if (enemy.getCurrentHealth() <= 0) {
-//          getHero().levelUp();
-//          creatureDeath(enemy);
-//          return attacker;
-//        }
-//        enemy.strike(getHero());
-//        if (getHero().currentHealth <= 0) {
-//          getHero().alive = false;
-//          break;
-//        }
-//      }
-//    } else while (true) {
-//      attacker.strike(getHero());
-//      if (getHero().currentHealth <= 0) {
-//        getHero().alive = false;
-//        break;
-//      }
-//      getHero().strike(attacker);
-//      if (attacker.getCurrentHealth() <= 0) {
-//        getHero().levelUp();
-//        return attacker;
-//      }
-//    }
-//
-//    return null;
-//  }
 
   public Creature battle(Creature attacker, Creature enemy) throws IOException {
     System.out.println("Attacker: " + attacker);

@@ -49,7 +49,6 @@ public class GameLogic {
         mapArray[i][j] = 0;
       }
     }
-    int[][] directions = new int[][]{{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
     Random random = new Random();
     int x = 0;
     int y = 0;
@@ -64,6 +63,14 @@ public class GameLogic {
       if (randomPick == 2 && (x + 1) < 10) x += 1;
       GameLogic.mapArray[x][y] = 1;
       if (randomPick == 3 && (y - 1) > 0) y -= 1;
+      GameLogic.mapArray[x][y] = 1;
+    }
+    while (y > 2) {
+      y -= 1;
+      GameLogic.mapArray[x][y] = 1;
+    }
+    while (x > 2) {
+      x -= 1;
       GameLogic.mapArray[x][y] = 1;
     }
 
@@ -139,18 +146,35 @@ public class GameLogic {
     return null;
   }
 
+//  public void battle(Creature enemy) throws IOException {
+//
+//    while (true) {
+//      getHero().strike(enemy);
+//      if (enemy.getCurrentHealth() <= 0) {
+//        getHero().levelUp();
+//        creatureDeath(enemy);
+//        break;
+//      }
+//      enemy.strike(getHero());
+//      if (getHero().currentHealth <= 0) {
+//        getHero().alive = false;
+//        break;
+//      }
+//    }
+//  }
+
   public void battle(Creature enemy) throws IOException {
 
     while (true) {
       getHero().strike(enemy);
-      enemy.strike(getHero());
-      if (getHero().currentHealth <= 0) {
-        getHero().alive = false;
-        break;
-      }
       if (enemy.getCurrentHealth() <= 0) {
         getHero().levelUp();
         creatureDeath(enemy);
+        break;
+      }
+      enemy.strike(getHero());
+      if (getHero().currentHealth <= 0) {
+        getHero().alive = false;
         break;
       }
     }
@@ -165,10 +189,10 @@ public class GameLogic {
 
   public void newLevel() throws IOException {
     creatures.clear();
-    if (currentLevel > 1) generateRandomMap();
-    getHero().x=0;
-    getHero().y=0;
     currentLevel++;
+    if (currentLevel > 1) generateRandomMap();
+    getHero().x = 0;
+    getHero().y = 0;
     addSkeletons(currentLevel);
     addBoss(currentLevel);
     creatures.get(new Random().nextInt(creatures.size())).hasKey = true;

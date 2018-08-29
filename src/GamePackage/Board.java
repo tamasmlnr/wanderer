@@ -17,7 +17,7 @@ public class Board extends JComponent implements KeyListener {
   public static final int WIDTH = 720;
   public static final int HEIGHT = 720;
   GameLogic gameLogic;
-  public BufferedImage gameOver = ImageIO.read(new File("img/hero-dead.png"));
+  public BufferedImage gameOver = ImageIO.read(new File("img/gameover.png"));
 
   public Board() throws IOException {
     gameLogic = new GameLogic();
@@ -69,8 +69,7 @@ public class Board extends JComponent implements KeyListener {
       e.printStackTrace();
     }
     drawStats(g);
-    if (!gameLogic.getHero().alive) g.drawImage(creature.currentImage(), creature.getX(), creature.getY(), this);
-      ("Game over", 360, 360);
+    if (!gameLogic.getHero().alive) g.drawImage(gameOver, 250, 250, this);
 
   }
 

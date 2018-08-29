@@ -30,18 +30,46 @@ public class GameLogic {
     addHero();
   }
 
+//  public void generateRandomMap() {
+//    for (int i = 0; i < GameLogic.mapArray.length; i++) {
+//      for (int j = 0; j < GameLogic.mapArray[0].length; j++) {
+//        Random random = new Random();
+//        double x = random.nextDouble();
+//        if(x>0.3)
+//        mapArray[i][j] = 1;
+//        if(x<=0.3)
+//          mapArray[i][j] = 0;
+//      }
+//    }
+//  }
+
   public void generateRandomMap() {
     for (int i = 0; i < GameLogic.mapArray.length; i++) {
       for (int j = 0; j < GameLogic.mapArray[0].length; j++) {
-        Random random = new Random();
-        double x = random.nextDouble();
-        if(x>0.3)
-        mapArray[i][j] = 1;
-        if(x<=0.3)
-          mapArray[i][j] = 0;
+        mapArray[i][j] = 0;
       }
     }
+    int[][] directions = new int[][]{{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+    Random random = new Random();
+    int x = 0;
+    int y = 0;
+    GameLogic.mapArray[x][y] = 1;
+    for (int i = 0; i < 200; i++) {
+      int randomPick = random.nextInt(4);
+      System.out.println(randomPick);
+      if (randomPick == 0 && (x - 1) > 0) x -= 1;
+      GameLogic.mapArray[x][y] = 1;
+      if (randomPick == 1 && (y + 1) < 10) y += 1;
+      GameLogic.mapArray[x][y] = 1;
+      if (randomPick == 2 && (x + 1) < 10) x += 1;
+      GameLogic.mapArray[x][y] = 1;
+      if (randomPick == 3 && (y - 1) > 0) y -= 1;
+      GameLogic.mapArray[x][y] = 1;
+    }
+
+
   }
+
 
   public static int d6() {
     Random rn = new Random();
@@ -137,12 +165,15 @@ public class GameLogic {
 
   public void newLevel() throws IOException {
     creatures.clear();
+    if (currentLevel > 1) generateRandomMap();
+    getHero().x=0;
+    getHero().y=0;
     currentLevel++;
     addSkeletons(currentLevel);
     addBoss(currentLevel);
-    creatures.get(new Random().nextInt(creatures.size())).hasKey=true;
+    creatures.get(new Random().nextInt(creatures.size())).hasKey = true;
     getHero().getLevelBonus();
-    if (currentLevel>1) generateRandomMap();
+
   }
 }
 

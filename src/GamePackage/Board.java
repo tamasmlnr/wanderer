@@ -3,10 +3,13 @@ package GamePackage;
 import Tile.*;
 import Character.*;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -14,6 +17,7 @@ public class Board extends JComponent implements KeyListener {
   public static final int WIDTH = 720;
   public static final int HEIGHT = 720;
   GameLogic gameLogic;
+  public BufferedImage gameOver = ImageIO.read(new File("img/hero-dead.png"));
 
   public Board() throws IOException {
     gameLogic = new GameLogic();
@@ -65,7 +69,8 @@ public class Board extends JComponent implements KeyListener {
       e.printStackTrace();
     }
     drawStats(g);
-    if (!gameLogic.getHero().alive) g.drawString("Game over", 360, 360);
+    if (!gameLogic.getHero().alive) g.drawImage(creature.currentImage(), creature.getX(), creature.getY(), this);
+      ("Game over", 360, 360);
 
   }
 
@@ -115,6 +120,9 @@ public class Board extends JComponent implements KeyListener {
     } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
       gameLogic.getHero().moveRight();
       gameLogic.randomMoveCreatures();
+    }
+    else if (e.getKeyCode() == KeyEvent.VK_L) {
+      gameLogic.generateRandomMap();
     }
 
     repaint();

@@ -9,15 +9,60 @@ import java.io.IOException;
 import java.util.Random;
 
 public class Hero extends Creature {
-  public BufferedImage heroImgDown = ImageIO.read(new File("img/hero-down.png"));
-  public BufferedImage heroImgUp = ImageIO.read(new File("img/hero-up.png"));
-  public BufferedImage heroImgLeft = ImageIO.read(new File("img/hero-left.png"));
-  public BufferedImage heroImgRight = ImageIO.read(new File("img/hero-right.png"));
-  public BufferedImage heroDead = ImageIO.read(new File("img/hero-dead.png"));
+  public BufferedImage heroImgDown;
+
+  {
+    try {
+      heroImgDown = ImageIO.read(new File("img/hero-down.png"));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
+  public BufferedImage heroImgUp;
+
+  {
+    try {
+      heroImgUp = ImageIO.read(new File("img/hero-up.png"));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
+  public BufferedImage heroImgLeft;
+
+  {
+    try {
+      heroImgLeft = ImageIO.read(new File("img/hero-left.png"));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
+  public BufferedImage heroImgRight;
+
+  {
+    try {
+      heroImgRight = ImageIO.read(new File("img/hero-right.png"));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
+  public BufferedImage heroDead;
+
+  {
+    try {
+      heroDead = ImageIO.read(new File("img/hero-dead.png"));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
   public boolean alive;
 //  public static int stepCount = 0;
 
-  public Hero() throws IOException {
+  public Hero() {
     super(0, 0);
     level = 1;
     maxHealth = 20 + 3 * GameLogic.d6();
@@ -28,23 +73,19 @@ public class Hero extends Creature {
   }
 
   public void moveRight() {
-//    stepCount++;
     if (alive)
       super.moveRight();
   }
 
   public void moveLeft() {
-//    stepCount++;
     if (alive) super.moveLeft();
   }
 
   public void moveUp() {
-//    stepCount++;
     if (alive) super.moveUp();
   }
 
   public void moveDown() {
-//    stepCount++;
     if (alive) super.moveDown();
   }
 
@@ -72,9 +113,8 @@ public class Hero extends Creature {
     double x = random.nextDouble();
     if (0.5>x) currentHealth=(int)(currentHealth*1.1);
     if (0.5<=x&&0.9>x) currentHealth=(int)(currentHealth*1.3);
-    if (0.9<x) currentHealth=(int)(currentHealth=maxHealth);
+    if (0.9<x) currentHealth=maxHealth;
     if (currentHealth>maxHealth) currentHealth=maxHealth;
   }
-
 }
 

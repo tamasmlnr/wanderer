@@ -5,8 +5,17 @@ import java.io.File;
 import java.io.IOException;
 
 public class NotEmptyTile {
-  public BufferedImage image = ImageIO.read(new File("img/floor.png"));
-  public NotEmptyTile() throws IOException {
+  public BufferedImage image;
+
+  {
+    try {
+      image = ImageIO.read(new File("img/floor.png"));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
+  public NotEmptyTile() {
   }
 
   public BufferedImage getImage() {

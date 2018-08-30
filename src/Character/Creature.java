@@ -53,8 +53,13 @@ public class Creature {
     return pos;
   }
 
-  public BufferedImage currentImage() throws IOException {
-    BufferedImage def = ImageIO.read(new File("img/hero-right.png"));
+  public BufferedImage currentImage(){
+    BufferedImage def = null;
+    try {
+      def = ImageIO.read(new File("img/hero-right.png"));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
     return def;
   }
 
@@ -122,7 +127,6 @@ public class Creature {
   public void strike(Creature enemy) {
     int sv = 2 * GameLogic.d6() + sp;
     if (sv > enemy.dp) {
-      System.out.println(enemy + " " + sv);
       enemy.currentHealth -= sv - enemy.dp;
     }
   }

@@ -6,9 +6,17 @@ import java.io.File;
 import java.io.IOException;
 
 public class EmptyTile {
-  public BufferedImage image = ImageIO.read(new File("img/wall.png"));
+  public BufferedImage image;
 
-  public EmptyTile() throws IOException {
+  {
+    try {
+      image = ImageIO.read(new File("img/wall.png"));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
+  public EmptyTile()  {
   }
 
   public BufferedImage getImage() {

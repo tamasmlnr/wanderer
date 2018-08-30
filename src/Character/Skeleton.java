@@ -9,9 +9,18 @@ import java.io.File;
 import java.io.IOException;
 
 public class Skeleton extends Creature {
-  public BufferedImage skelly = ImageIO.read(new File("img/skeleton.png"));
 
-  public Skeleton(int x, int y, int level) throws IOException {
+  public BufferedImage skelly;
+
+  {
+    try {
+      skelly = ImageIO.read(new File("img/skeleton.png"));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
+  public Skeleton(int x, int y, int level) {
     super(x, y);
     this.level=1;
     maxHealth=2*level*GameLogic.d6();

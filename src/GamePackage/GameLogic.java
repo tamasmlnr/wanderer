@@ -23,7 +23,7 @@ public class GameLogic {
           {1, 1, 1, 0, 1, 0, 0, 1, 1, 1},};
 
 
-  public GameLogic() throws IOException {
+  public GameLogic() {
     creatures = new ArrayList<>();
     addHero();
   }
@@ -77,7 +77,7 @@ public class GameLogic {
     return rn.nextInt(5) + 1;
   }
 
-  public void addHero() throws IOException {
+  public void addHero() {
     hero = new Hero();
   }
 
@@ -94,7 +94,7 @@ public class GameLogic {
     return co;
   }
 
-  public void addSkeletons(int level) throws IOException {
+  public void addSkeletons(int level) {
     int[] skelPos;
     for (int i = 0; i < 3; i++) {
       skelPos = generateRandomSpawn();
@@ -102,7 +102,7 @@ public class GameLogic {
     }
   }
 
-  public void addBoss(int level) throws IOException {
+  public void addBoss(int level) {
     int[] bossPos = generateRandomSpawn();
     creatures.add(new Boss(bossPos[0], bossPos[1], level));
   }
@@ -118,7 +118,7 @@ public class GameLogic {
     return true;
   }
 
-  public void randomMoveCreatures() throws IOException {
+  public void randomMoveCreatures() {
     ArrayList<Creature> toRemove = new ArrayList<Creature>();
     for (Creature creature : creatures) {
       creature.randomMove();
@@ -145,8 +145,7 @@ public class GameLogic {
     return null;
   }
 
-  public Creature battle(Creature attacker, Creature enemy) throws IOException {
-    System.out.println("Attacker: " + attacker);
+  public Creature battle(Creature attacker, Creature enemy) {
     if (attacker.equals(getHero())) {
       while (true) {
         getHero().strike(enemy);
@@ -178,12 +177,12 @@ public class GameLogic {
   }
 
 
-  public void creatureDeath(Creature creature) throws IOException {
+  public void creatureDeath(Creature creature) {
     creatures.remove(creature);
     if (creature.hasKey) newLevel();
   }
 
-  public void newLevel() throws IOException {
+  public void newLevel() {
     creatures.clear();
     currentLevel++;
     if (currentLevel > 1) generateRandomMap();

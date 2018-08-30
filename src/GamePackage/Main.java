@@ -5,7 +5,7 @@ import java.io.IOException;
 
 public class Main {
 
-  public static void main(String[] args) throws IOException {
+  public static void main(String[] args) {
     JFrame frame = new JFrame("Wanderer");
     Board board = new Board();
     frame.add(board);
